@@ -1,0 +1,24 @@
+# package directories
+node_modules
+jspm_packages
+
+# aws infra
+.infra-aws/*
+.infra-aws/*
+
+# stack dir
+.build/*
+
+# directories
+src/scripts/*
+config/secrets.*
+__tests__/integration/carrierFlows/*
+
+# OSX
+.DS_Store
+
+# Files
+variables.env
+
+# Serverless directories
+.serverless

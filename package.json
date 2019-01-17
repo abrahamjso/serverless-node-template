@@ -1,0 +1,48 @@
+{
+  "name": "serverless_node_template",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "aws-sdk": "^2.316.0",
+    "aws-xray-sdk": "^2.0.1",
+    "axios": "^0.18.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.2.15",
+    "prettier": "^1.14.3",
+    "yup": "^0.26.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.24.1",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "jest": "^23.6.0",
+    "serverless-api-gateway-xray": "^1.0.0",
+    "serverless-domain-manager": "^2.6.5",
+    "serverless-offline": "^3.25.12",
+    "serverless-plugin-tracing": "^2.0.0",
+    "serverless-pseudo-parameters": "^2.2.0",
+    "serverless-stack-output": "^0.2.3",
+    "supertest": "^3.3.0"
+  },
+  "scripts": {
+    "lint": "eslint src/**/*.js --fix",
+    "integration": "NODE_ENV=local jest ./__tests__/integration/*.js",
+    "integration-aws": "NODE_ENV=$Env jest ./__tests__/integration/*.js",
+    "dev": "sls offline start --skipCacheInvalidation",
+    "remove-qa": "serverless remove --stage qa -v",
+    "remove-prod": "serverless remove --stage prod -v",
+    "deploy-qa": "sls deploy --stage $Env && npm run integration-aws NODE_ENV=$Env",
+    "deploy-dev": "sls deploy --stage $Env",
+    "deploy-prod": "sls deploy --stage $Env",
+    "deploy-domain-qa": "sls create_domain --stage $Env && sls deploy --stage $Env && npm run integration-aws NODE_ENV=$Env",
+    "deploy-domain-dev": "sls create_domain --stage $Env && sls deploy --stage $Env",
+    "deploy-domain-prod": "sls create_domain --stage $Env && sls deploy --stage $Env"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

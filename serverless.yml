@@ -1,0 +1,90 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: template # NOTE: update this with your service name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X.X"
+
+
+## TODO: 
+  # Nota, cuando se haga el invoke local o el modo offline, en el security group de grant, habra falla!!!
+provider:
+  name: aws
+  stage: ${opt:stage, 'local'}
+  runtime: nodejs8.10
+  region: us-east-1
+  tracing: true
+  # profile: mgo.core.dev
+  memorySize: 256
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action: 'ssm:GetParameters'
+      Resource:
+        - 'arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/my-params'
+    - Effect: "Allow"
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource:
+        - "*"
+  environment:
+    stage: ${self:provider.stage}
+    KEYID: ${file(config/secrets.json):AWSKEYID, ''}
+    ACCESSKEY: ${file(config/secrets.json):AWSKEY, ''}
+    domainName: ${file(config/domain_manager-${self:provider.stage}.json):domain, 'something'}
+    certificateName: ${file(config/domain_manager-${self:provider.stage}.json):certificate, 'something'}
+    ssm: 'my-params'
+
+functions:
+  # People
+  GetAll:
+    handler: src/functions/person.getAll
+    events:
+      - http:
+          path: people
+          method: get
+  GetPersonByID:
+    handler: src/functions/person.getByID
+    events:
+      - http:
+          path: pleople/{id}
+          method: get
+          request: 
+            parameters: 
+              paths: 
+                id: true
+
+custom:
+  apiGatewayXray: true
+  output:
+    file: .build/stack.json
+  version: V1 
+  customDomain:
+    basePath: api
+    RestApiId: 
+      Ref: ApiGatewayRestApi
+    domainName: ${file(config/domain_manager-${self:provider.stage}.json):domain, ''}
+    certificateName: ${file(config/domain_manager-${self:provider.stage}.json):certificate, ''}
+    endpointType: 'regional'
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+  
+plugins:
+  - serverless-offline
+  - serverless-pseudo-parameters
+  - serverless-domain-manager
+  - serverless-stack-output
+  - serverless-plugin-tracing
+  - serverless-api-gateway-xray

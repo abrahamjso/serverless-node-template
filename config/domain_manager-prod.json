@@ -1,0 +1,4 @@
+{
+  "domain": "api.prod.abrahamjso.com",
+  "certificate": "*.prod.abrahamjso.com"
+}
