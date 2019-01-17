@@ -4,8 +4,7 @@ if (process.env.stage !== 'local') { // When is deployed (dev,qa, prod), gonna s
   awsXRay.captureAWS(require('aws-sdk')); // eslint-disable-line
 }
 // Self Libraries
-const utils = require('../lib/utils/mgo.utils').AWS;
-const vmo = require('../lib/utils/validations.utils');
+const utils = require('../lib/utils/utils').AWS;
 const personController = require('../lib/controllers/person');
 
 // Main
