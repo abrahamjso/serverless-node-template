@@ -6,7 +6,7 @@
   "dependencies": {
     "aws-sdk": "^2.316.0",
     "aws-xray-sdk": "^2.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "moment": "^2.22.2",
     "mongoose": "^5.2.15",
     "prettier": "^1.14.3",
