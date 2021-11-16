@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "dependencies": {
-    "aws-sdk": "^2.316.0",
+    "aws-sdk": "^2.814.0",
     "aws-xray-sdk": "^2.0.1",
     "axios": "^0.18.0",
     "moment": "^2.22.2",
