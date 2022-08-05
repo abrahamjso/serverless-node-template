@@ -8,7 +8,7 @@
     "aws-xray-sdk": "^2.0.1",
     "axios": "^0.18.0",
     "moment": "^2.22.2",
-    "mongoose": "^5.2.15",
+    "mongoose": "^5.7.5",
     "prettier": "^1.14.3",
     "yup": "^0.26.6"
   },
