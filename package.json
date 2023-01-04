@@ -19,7 +19,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^21.24.1",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "jest": "^23.6.0",
+    "jest": "^29.3.1",
     "serverless-api-gateway-xray": "^1.0.0",
     "serverless-domain-manager": "^2.6.5",
     "serverless-offline": "^3.25.12",
